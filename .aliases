@@ -136,3 +136,8 @@ alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resourc
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+# Inside TMUX we need this
+alias subl='reattach-to-user-namespace subl'
+alias stree='reattach-to-user-namespace stree'
+alias open='reattach-to-user-namespace open'
