@@ -153,9 +153,13 @@
 	autocorrect = 1
 
 [merge]
-
+	tool = diffmerge
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+
+[mergetool "diffmerge"]
+	cmd = diffmerge --merge\n--result=$MERGED $LOCAL $BASE $REMOTE
+	trustExitCode = true
 
 [push]
 
