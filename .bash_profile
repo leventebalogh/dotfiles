@@ -18,6 +18,11 @@ shopt -s histappend;
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
+# Git autocompletion
+if [ -f ~/.git-completion.bash ]; then
+	. ~/.git-completion.bash
+fi
+
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
