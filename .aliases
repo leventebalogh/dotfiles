@@ -137,8 +137,10 @@ alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resourc
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# Inside TMUX we need this
-alias subl='reattach-to-user-namespace subl'
-alias stree='reattach-to-user-namespace stree'
-alias gitx='reattach-to-user-namespace gitx'
-alias open='reattach-to-user-namespace open'
+# On Mac
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias subl='reattach-to-user-namespace subl'
+    alias stree='reattach-to-user-namespace stree'
+    alias gitx='reattach-to-user-namespace gitx'
+    alias open='reattach-to-user-namespace open'
+fi
