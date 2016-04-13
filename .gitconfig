@@ -30,6 +30,8 @@
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f" # Find commits by commit message
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d" # Remove branches that have already been merged with master - a.k.a. ‘delete merged’
 	contributors = shortlog --summary --numbered # List contributors with number of commits
+	contributors_month = "!git log --oneline --pretty='%ae' --since=date '+%Y-%m-01' | sort | uniq -c | xargs -n2 echo | sort -bn"
+
 
 	# Merge GitHub pull request on top of the current branch or,
 	# if a branch name is specified, on top of the specified branch
