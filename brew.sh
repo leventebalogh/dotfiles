@@ -74,6 +74,12 @@ brew install python3
 
 # Install useful Applications
 brew cask install google-chrome
+brew cask install sublime-text3
+brew cask install dockertoolbox
+brew cask install tunnelblick
+brew cask install firefox
+brew cask install android-file-transfer
+brew cask install torbrowser
 brew cask install vlc
 brew cask install cheatsheet
 brew cask install transmission
@@ -88,6 +94,14 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | 
 nvm install stable
 nvm use stable
 nvm alias default stable
+
+# Install NPM Packages
+npm install -g eslint
+npm install -g babel-eslint
+npm install -g eslint-plugin-react
+npm install -g gulp gulp-cli
+npm install -g browserify
+npm install -g typescript
 
 # Remove outdated versions from the cellar.
 brew cleanup
