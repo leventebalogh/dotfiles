@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
+# Install Command-line tools and useful Applications
 
 # Ask for the administrator password upfront.
 sudo -v
