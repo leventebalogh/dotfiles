@@ -106,5 +106,10 @@ npm install -g gulp gulp-cli
 npm install -g browserify
 npm install -g typescript
 
+# Setup Sublime Text
+cp "~/sublime/Package Control.sublime-package" "~/Library/Application Support/Sublime Text 3/Installed Packages/"
+cp "~/sublime/Package Control.sublime-settings" "~/Library/Application Support/Sublime Text 3/Packages/User/"
+cp "~/sublime/Preferences.sublime-settings" "~/Library/Application Support/Sublime Text 3/Packages/User/"
+
 # Remove outdated versions from the cellar.
 brew cleanup
