@@ -83,5 +83,11 @@ brew cask install spotify
 brew cask install osxfuse
 brew cask install encfs
 
+# Install Node JS
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash```
+nvm install stable
+nvm use stable
+nvm alias default stable
+
 # Remove outdated versions from the cellar.
 brew cleanup
