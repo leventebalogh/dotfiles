@@ -13,13 +13,23 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
 alias g="git"
 alias h="history"
+alias voc="subl ~/Desktop/VOC.txt"
+
+# Casumo specific
 alias casumo="cd ~/casumo/Casumo-Engine"
+alias open-issue="f () { branch=`git rev-parse --abbrev-ref HEAD`; echo $branch; }; f"
+alias new-issue="open https://github.com/Casumo/Home/issues/new"
+
+# MongoDB
+alias mongo-start="sudo mongod --fork --logpath /private/var/log/mongod/mongod.log"
+alias mongo-stop="sudo kill -9 $(ps aux | grep '[m]ongod --fork' | awk '{print $2}')"
+alias mongo-log="sudo tail -f /private/var/log/mongod/mongod.log"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
+    colorflag="--color"
 else # OS X `ls`
-	colorflag="-G"
+    colorflag="-G"
 fi
 
 # List all files colorized in long format
@@ -98,7 +108,7 @@ alias map="xargs -n1"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "$method"="lwp-request -m '$method'"
+    alias "$method"="lwp-request -m '$method'"
 done
 
 # Kill all the tabs in Chrome to free up memory
@@ -108,6 +118,9 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
+# Tree
+alias tree="tree -L 3"
+
 # On Mac
 if [[ "$OSTYPE" == "darwin"* ]]; then
     alias subl='reattach-to-user-namespace subl'
@@ -116,33 +129,33 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     alias open='reattach-to-user-namespace open'
 
     # Lock the screen (when going AFK)
-	alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+    alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
-	# Volume
-	alias mute="osascript -e 'set volume output muted true'"
-	alias volume-up="osascript -e 'set volume 7'"
+    # Volume
+    alias mute="osascript -e 'set volume output muted true'"
+    alias volume-up="osascript -e 'set volume 7'"
 
-	# Merge PDF files
-	# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-	alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+    # Merge PDF files
+    # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+    alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
-	# Disable Spotlight
-	alias spotoff="sudo mdutil -a -i off"
+    # Disable Spotlight
+    alias spotoff="sudo mdutil -a -i off"
 
-	# Enable Spotlight
-	alias spoton="sudo mdutil -a -i on"
+    # Enable Spotlight
+    alias spoton="sudo mdutil -a -i on"
 
-	# Show/hide hidden files in Finder
-	alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-	alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+    # Show/hide hidden files in Finder
+    alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+    alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-	# Hide/show all desktop icons (useful when presenting)
-	alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-	alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+    # Hide/show all desktop icons (useful when presenting)
+    alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+    alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-	# Trim new lines and copy to clipboard
-	alias c="tr -d '\n' | pbcopy"
+    # Trim new lines and copy to clipboard
+    alias c="tr -d '\n' | pbcopy"
 
-	# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-	alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update'
+    # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+    alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update'
 fi
