@@ -94,6 +94,9 @@ brew cask install spotify
 brew cask install osxfuse
 brew cask install encfs
 brew cask install gitx
+brew cask install iterm
+brew cask install spectacle
+brew cask install gitify
 
 # Install Node JS
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
