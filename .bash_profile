@@ -1,25 +1,28 @@
-# Check if ~/bin exists
+# Create ~/bin if not exists
 if [ ! -d ~/bin ]; then
-	mkdir ~/bin
+    mkdir ~/bin
 fi
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-# Add a symlink to Sublime => subl
-if [ ! -h ~/bin/subl ]; then
-	ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
-fi
+# Add `~/scripts/bin` to the `$PATH`
+export PATH="$HOME/scripts/bin:$PATH";
 
 # Load NVM
-export NVM_DIR="~/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# Add a symlink to Sublime => subl
+if [ ! -h ~/bin/subl ]; then
+    ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+fi
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra,git-completion,gulp-completion}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -36,7 +39,7 @@ shopt -s cdspell;
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
 for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
+    shopt -s "$option" 2> /dev/null;
 done;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
