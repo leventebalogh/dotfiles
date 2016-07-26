@@ -7,6 +7,7 @@ sudo -v
 
 # Install XCode Commandline Tools
 xcode-select --install
+
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -99,10 +100,9 @@ brew cask install spectacle
 brew cask install gitify
 
 # Install Node JS
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-nvm install stable
-nvm use stable
-nvm alias default stable
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.3/install.sh | bash
+nvm install node
+nvm use node
 
 # Install NPM Packages
 npm install -g eslint
