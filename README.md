@@ -1,11 +1,28 @@
 # Levente Balogh's dotfiles
 
-These dotfiles are forked from the dotfiles of Mathias Bynens. 
-This three lines of code installs each important binaries and applications and sets up OSX.
-(Please see the dotfiles themselves for further details)
+These dotfiles are forked from the dotfiles of Mathias Bynens and are extended to my own flavour.
+
+## Install locally
+```
+$ git clone git@github.com:leventebalogh/.dotfiles.git
+$ cd dotfiles
+$ ./bootstrap.sh
+```
+
+## Copy to server
+This assumes that you already have the `dotfiles` repo cloned.
 
 ```
-mkdir ~/projects; cd ~/projects;
-git clone https://github.com/leventebalogh/.dotfiles.git ~/projects/dotfiles; ~/projects/dotfiles/bootstrap.sh
-~/.osx
+$ cd dotfiles
+$ rsync --exclude ".git/" \
+        --exclude "scripts/" \
+        --exclude "osx/" \
+        --exclude "bootstrap.sh" \
+        --exclude ".DS_Store" \
+        --exclude ".gitignore" \
+		--exclude "README.md" \
+        -avh \
+        --no-perms \
+        . \
+        foo@bar:~;
 ```
