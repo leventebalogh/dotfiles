@@ -20,7 +20,7 @@ $ rsync --exclude ".git/" \
         --exclude "bootstrap.sh" \
         --exclude ".DS_Store" \
         --exclude ".gitignore" \
-		--exclude "README.md" \
+        --exclude "README.md" \
         -avh \
         --no-perms \
         . \
