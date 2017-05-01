@@ -26,3 +26,38 @@ $ rsync --exclude ".git/" \
         . \
         foo@bar:~;
 ```
+
+## Functions
+
+    - `calc 1+3 # Outputs 4` A simple calculator command
+    - `mkd foobar` Creates and enters foobar directory
+    - `targz ./foobar` Creates foobar.tar.gz
+    - `fs ~/Desktop` Calculates the size of a directory or a folder
+    - `dataurl ./foobar.jpg` Creates a dataurl from a file
+    - `tre` Shorthand for tree with colors enabled, listing directories first
+    - `o ./foobar` Opens a directory or the current location
+
+## Aliases
+
+    - `.. # cd ..`
+    - `... # cd ../../`
+    - `.... # cd ../../../`
+    - `~ # cd ~`
+    - `- # cd -`
+    - `timer` Starts a timer
+    - `ip` Shows your IP visible from outside
+    - `localip` Shows your local IP address
+    - `cleanup` Recursively delete `.DS_Store` files
+    - `emptytrash` Empties the trash
+    - `urlencode "a=2&b=3"` URL-encodes a string
+    - `chromekill` Kills all tabs in Chrome
+    - `reload` Reloads the shell
+
+    ** OSX Specific**
+    - `lock` Locks the screen
+    - `mute` Mutes the speakers
+    - `unmute` Unmutes the speakers
+    - `show` Shows hidden files in Finder
+    - `hide` Hides hidden files in Finder
+    - `show-desktop` Shows all files on Desktop
+    - `hide-desktop` Hides all files on Desktop
