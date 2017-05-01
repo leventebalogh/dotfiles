@@ -37,6 +37,13 @@ $ rsync --exclude ".git/" \
 - `tre` **-** Shorthand for tree with colors enabled, listing directories first
 - `o ./foobar` **-** Opens a directory or the current location
 
+**Docker**
+- `drm foobar` **-** Stops and removes the *foobar* container
+- `da foobar` **-** Starts bash in the *foobar* container
+- `dip foobar` **-** Gets the IP address of the *foobar* container
+- `drmc` **-** Removes all stopped containers
+- `drmi` **-** Removes all stopped images
+
 ## Aliases
 
 - `.. # => cd ..`

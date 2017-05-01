@@ -1,3 +1,30 @@
+# Docker
+function drm () { docker-remove $1; }
+function docker-remove () {
+	docker stop $1 ; docker rm $1;
+}
+
+function da () { docker-attach $1; }
+function docker-attach () {
+	docker exec -it $1 bash;
+}
+
+function dip () { docker-get-ip $1; }
+function docker-get-ip () {
+	docker inspect $1 | grep IPAddress | cut -d '"' -f 4;
+}
+
+function drmi () { docker-remove-images $1; }
+function docker-remove-images () {
+	docker rmi $(docker images -q);
+}
+
+function drmc () { docker-remove-containers $1; }
+function docker-remove-containers () {
+	docker rm $(docker ps -q -a);
+}
+
+
 # Simple calculator
 function calc() {
 	local result="";
