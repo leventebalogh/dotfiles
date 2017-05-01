@@ -29,7 +29,7 @@ $ rsync --exclude ".git/" \
 
 ## Functions
 
-- `calc 1+3 # Outputs 4` **-** A simple calculator command
+- `calc 1+3 # => 4` **-** A simple calculator command
 - `mkd foobar` **-** Creates and enters foobar directory
 - `targz ./foobar` **-** Creates foobar.tar.gz
 - `fs ~/Desktop` **-** Calculates the size of a directory or a folder
@@ -39,11 +39,11 @@ $ rsync --exclude ".git/" \
 
 ## Aliases
 
-- `.. # cd ..`
-- `... # cd ../../`
-- `.... # cd ../../../`
-- `~ # cd ~`
-- `- # cd -`
+- `.. # => cd ..`
+- `... # => cd ../../`
+- `.... # => cd ../../../`
+- `~ # => cd ~`
+- `- # => cd -`
 - `timer` **-** Starts a timer
 - `ip` **-** Shows your IP visible from outside
 - `localip` **-** Shows your local IP address
@@ -53,7 +53,7 @@ $ rsync --exclude ".git/" \
 - `chromekill` **-** Kills all tabs in Chrome
 - `reload` **-** Reloads the shell
 
-** OSX Specific**
+**OSX Specific**
 - `lock` **-** Locks the screen
 - `mute` **-** Mutes the speakers
 - `unmute` **-** Unmutes the speakers
