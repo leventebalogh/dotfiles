@@ -1,0 +1,40 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    { "key": "cmd+l",               "command": "expandLineSelection",
+                                    "when": "editorFocus" },
+    { "key": "cmd+l",               "command": "expandLineSelection",
+                                    "when": "editorTextFocus" },
+    { "key": "shift+cmd+up",        "command": "editor.action.moveLinesUpAction",
+                                    "when": "editorTextFocus" },
+    { "key": "shift+cmd+down",      "command": "editor.action.moveLinesDownAction",
+                                    "when": "editorTextFocus" },
+    { "key": "ctrl+shift+tab",      "command": "workbench.action.previousEditor"},
+    { "key": "ctrl+tab",            "command": "workbench.action.nextEditor"},
+    { "key": "shift+space",         "command": "editor.action.triggerSuggest",
+                                    "when": "editorTextFocus" },
+
+    // Folding
+    { "key": "cmd+[",               "command": "editor.fold",
+                                    "when": "editorTextFocus" },
+    { "key": "shift+cmd+[",         "command": "editor.foldAll",
+                                    "when": "editorTextFocus" },
+    { "key": "cmd+]",               "command": "editor.unfold",
+                                    "when": "editorTextFocus" },
+    { "key": "shift+cmd+]",         "command": "editor.unfoldAll",
+                                    "when": "editorTextFocus" },
+
+    // Files
+    { "key": "cmd+r",               "command": "workbench.files.action.showActiveFileInExplorer" },
+
+    // Terminal
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorFocus && !terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "!editorFocus && terminalFocus"
+    }
+]
