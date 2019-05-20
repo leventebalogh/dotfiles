@@ -1,12 +1,10 @@
-# Editor
+# Make subl the default editor.
 export EDITOR='subl';
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY=~/.node_history;
-
 # Allow 32³ entries; the default is 1000.
 export NODE_REPL_HISTORY_SIZE='32768';
-
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE='sloppy';
 
@@ -16,7 +14,6 @@ export PYTHONIOENCODING='UTF-8';
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
-
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 

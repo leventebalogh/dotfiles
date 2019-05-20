@@ -4,19 +4,24 @@
 
 [alias]
 
-    l = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\" -n 30 --graph --abbrev-commit --decorate --date="short"
+    l = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\" -n 100 --graph --abbrev-commit --decorate --date="short"
     st = status
     sts = status -s
     br = branch
     co = checkout
+    log-pretty = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\"
 
     # Shortcuts for rebasing
     rbm = rebase -i origin/master
     rba = rebase --abort
     rbc = rebase --continue
 
-    # Show the diff between the latest commit and the current state
-    d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+    # Checkout
+    use-ours = "!f() { git diff --name-only --diff-filter=U | xargs git checkout --ours; }; f"
+    use-theirs = "!f() { git diff --name-only --diff-filter=U | xargs git checkout --theirs; }; f"
+
+    # Update
+    update = "!f() { git fetch --all -q && git rebase origin/master && git push --force; }; f"
 
     # List tags
     tags = tag -l
@@ -61,7 +66,8 @@
 
     # Adds a foo-bar commit with the latest changes
     # Note! This one is passing the commit hooks!
-    foo = "!f() { git add -A; git commit -nm 'Foo Bar'; }; f"
+    wip = "!f() { git add -A; git commit -nm 'Wip'; }; f"
+    wip-continue = "!f() { git reset HEAD^; }; f"
 
     # Shows only the merge commits to the master branch
     l-merges = "!f() { git l --merges --grep='Merge pull request'; }; f"
@@ -70,14 +76,14 @@
     conflicted-files = "!f() { git diff --name-only --diff-filter=U; }; f"
 
     # Shows which files were modified in the current branch
-    changed = "!f() { git diff --name-only $(git current-branch) $(git merge-base $(git current-branch) master); }; f"
+    changed = "!f() { if [ -z $1 ]; then branch=$(git current-branch); else branch=$1; fi; git diff --name-only $branch $(git merge-base $branch master); }; f"
 
     # Shows differences of the current branch relative to the master
     diff-to-master = "!f() { git diff master $(git current-branch) -- $1; }; f"
 
     # Shows branches belonging with to a user
     # E.g. `$ git branches-of Levente`
-    branches-of = "!f() { git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n | grep origin | grep $1; }; f"
+    branches-of = "!f() { git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n | grep origin | grep -i $1; }; f"
 
     # Tidying up commits on a branch that are not pushed yet.
     # This is only rebasing commits that are ahead of the upstream version,
@@ -87,13 +93,16 @@
     # Gives back the last commit's message
     commit-message = "!f() { echo `git log -1 --pretty=%B`; }; f"
 
+    # Open edited files
+    open-edited = "!f() { git status --short | sed s/' M '// | xargs code -r; }; f"
+
     # Casumo Specific aliases
     #------------------------
         # Returns the issue number
         issue-number = "!f() { git current-branch | sed -n 's/.*\\(iss[0-9]*\\).*/\\1/p' | sed 's/iss//'; }; f"
 
         # Creates a commit stamp
-        commit-stamp = "!f() { echo \"Casumo/Home$(git issue-number)\"; }; f"
+        commit-stamp = "!f() { echo \"Casumo/Home#$(git issue-number)\"; }; f"
 
         # Adds a commit stamp to the latest commit
         append-commit-stamp = "!f() { if [[ \"$(git commit-message)\" != *\"$1\"* ]] ; then git commit --amend -m \"$(git commit-message)\" -m \"$1\"; fi; }; f"
@@ -113,7 +122,7 @@
 [core]
 
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = /Users/leventebalogh/.gitignore
+	excludesfile = /Users/leventebalogh/.gitignore
     attributesfile = ~/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -126,7 +135,8 @@
     precomposeunicode = false
 
     # Use Sublime as default editor
-    editor = "reattach-to-user-namespace subl -w"
+	editor = vim
+    # ignorecase = false
 
 [color]
 
@@ -170,7 +180,7 @@
     autocorrect = 1
 
 [merge]
-    tool = diffmerge
+	tool = code
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
@@ -184,3 +194,8 @@
 
 [credential]
     helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
