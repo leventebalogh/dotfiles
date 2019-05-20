@@ -31,6 +31,7 @@ alias gp="git push"
 alias gl="git l"
 alias gco="git checkout"
 alias ts="tig status"
+alias pulls="open https://github.com/pulls"
 
 # Casumo
 alias c-new-issue="open https://github.com/Casumo/Home/issues/new"
