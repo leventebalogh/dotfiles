@@ -1,6 +1,6 @@
-# Levente Balogh's dotfiles
+# My dotfiles
 
-## Install locally
+## Install
 This one copies all the files under `./src` to your home directory.
 ```
 $ git clone git@github.com:leventebalogh/.dotfiles.git && cd dotfiles
