@@ -180,18 +180,7 @@ function docs () {
 }
 
 function edit () {
-	code -n \
-		~/.bash_aliases.sh \
-		~/.bash_exports.sh \
-		~/.bash_functions.sh \
-		~/.bash_prompt.sh \
-		~/.bash_profile \
-		~/.bashrc \
-		~/.gitconfig \
-		~/.gitignore \
-		~/.editorconfig \
-		~/.npmrc \
-		~/.yarnrc
+	code ~/projects/dotfiles
 }
 
 function printBold () {

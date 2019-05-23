@@ -8,6 +8,7 @@ alias -- -="cd -"
 
 # Other
 alias simulator="open -a Simulator"
+alias news="open https://hckrnews.com/"
 
 # Docker
 alias docker-clear-containers="docker rm $(docker ps -a -q)"
