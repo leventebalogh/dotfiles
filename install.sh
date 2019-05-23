@@ -1,7 +1,15 @@
 # Copying
 echo "* Copying dotfiles to ${HOME}"
 echo ""
-cp -frvT ./src/ ~/
+
+# OSX
+if [ "$(uname)" == "Darwin" ]; then
+    cp -frv ./src/ ~/
+# Linux
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    cp -frvT ./src/ ~/
+fi
+
 echo ""
 
 # Reloading bash session
