@@ -23,7 +23,7 @@ alias whois="f() { whois $1 | grep -E '^\s{3}'}; f"
 
 # Shortcuts
 alias voc="code -r ~/Desktop/notes/VOC.txt"
-alias notes="code -r ~/Desktop/notes/Notes.txt"
+alias notes="code -r ~/Documents/Dokumentumok/Notes/notes.txt"
 
 # Git
 alias gs="git status"
