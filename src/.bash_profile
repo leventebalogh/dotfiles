@@ -5,7 +5,7 @@ fi
 export PATH="$HOME/bin:$HOME/scripts/bin:$HOME/dev/flutter/bin:$PATH";
 
 # Init Homebrew
-export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Init NVM
 export NVM_DIR="$HOME/.nvm"
