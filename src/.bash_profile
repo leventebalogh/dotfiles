@@ -9,7 +9,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Init NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh
 
 # Load the shell dotfiles, and then some:
 for file in ~/.bash_{path,prompt,exports,aliases,functions,extra}.sh; do
