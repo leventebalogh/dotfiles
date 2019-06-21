@@ -43,3 +43,8 @@ done;
 # Z
 # Init Z. (https://github.com/rupa/z)
 . ~/projects/z/z.sh
+
+
+# FLUTTER
+# Initialise Flutter
+[ -s "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
