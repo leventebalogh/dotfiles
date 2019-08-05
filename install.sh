@@ -7,7 +7,8 @@ if [ "$(uname)" == "Darwin" ]; then
     cp -frv ./src/ ~/
 # Linux
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    cp -frvT ./src/ ~/
+    SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+    cp -frvT "$SCRIPTPATH/src/" ~/
 fi
 
 echo ""
