@@ -48,3 +48,8 @@ done;
 # FLUTTER
 # Initialise Flutter
 [ -s "$HOME/development/flutter/bin" ] && export PATH="$PATH:$HOME/development/flutter/bin"
+
+# Add tab-completion for hostnames
+compgen -A hostname;
+complete -A hostname ping;
+complete -A hostname ssh;
