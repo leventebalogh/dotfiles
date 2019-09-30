@@ -23,6 +23,9 @@ alias whois="f() { whois $1 | grep -E '^\s{3}'}; f"
 # Shortcuts
 alias voc="code -r ~/Desktop/notes/VOC.txt"
 alias notes="code -r ~/Documents/Safe/Notes/notes.txt"
+alias todo="code -r ~/Documents/Safe/Notes/todo.txt"
+alias budget="code -r ~/Documents/Safe/Notes/budget.txt"
+alias books="code -r ~/Documents/Safe/Notes/books.txt"
 alias teamspeak='open -a /Applications/TeamSpeak\ 3\ Client.app'
 alias draw='open https://docs.google.com/drawings/'
 
