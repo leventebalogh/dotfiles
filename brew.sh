@@ -56,6 +56,7 @@ brew install tree
 brew install vbindiff
 brew install nvm
 brew install tig
+brew install yarn
 
 # Installs Casks
 # brew tap caskroom/cask
