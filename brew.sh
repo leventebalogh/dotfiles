@@ -55,6 +55,7 @@ brew install ssh-copy-id
 brew install tree
 brew install vbindiff
 brew install nvm
+brew install tig
 
 # Installs Casks
 # brew tap caskroom/cask
