@@ -1,14 +1,21 @@
-# My dotfiles
+# Dotfiles
 
-## Install
-This one copies all the files under `./src` to your home directory.
+## Installing dotfiles
+To copy all the available dotfiles from under `./src` to your home directory just run the following commands:
 ```
 $ git clone git@github.com:leventebalogh/.dotfiles.git && cd dotfiles
 $ ./dotfiles-install.sh
 ```
 
-## Uninstall
-This removes every file (with the same name as in the `./src` folder) from your home directory.
+## Installing binaries and applications
+The following is installing the necessary binaries and applications I am using most frequently.
+It is using Brew under the hood.
+```
+$ ./brew.sh
+```
+
+## Uninstall dotfiles
+If you would like to remove the installed dotfiles run the following.
 ```
 $ ./dotfiles-uninstall.sh
 ```
