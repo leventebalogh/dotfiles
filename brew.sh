@@ -57,6 +57,7 @@ brew install vbindiff
 brew install nvm
 brew install tig
 brew install yarn
+brew install ansible
 
 # Installs Casks
 # brew tap caskroom/cask
