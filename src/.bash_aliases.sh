@@ -9,10 +9,21 @@ alias -- -="cd -"
 # Other
 alias simulator="open -a Simulator"
 
+# Browser
+alias incognito="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --incognito > /dev/null 2>&1 &"
+alias inc="incognito"
+alias new-chrome="rm -rf $HOME/tmp/chrome && mkdir -p $HOME/tmp/chrome && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --incognito --start-maximized --user-data-dir=$HOME/tmp/chrome > /dev/null 2>&1 &"
+alias work-chrome="mkdir -p $HOME/tmp/chrome-work && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --start-maximized --user-data-dir=$HOME/tmp/chrome-work > /dev/null 2>&1 &"
+
 # Docker
 alias docker-clear-containers="docker rm $(docker ps -a -q)"
 alias docker-clear-images='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
-alias docker-exec='f () { docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti "$1" bash; }; f'
+alias dce='f () { docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti "$1" bash; }; f'
+alias dcc="docker-clear-containers"
+alias dci="docker-clear-images"
+alias dcu='docker-compose up -d && docker-compose logs --follow'
+alias dcd='docker-compose down'
+alias dps='docker ps'
 
 # Network
 alias netusage="nettop -d -J "bytes_in,bytes_out""
@@ -37,10 +48,6 @@ alias gl="git l"
 alias gco="git checkout"
 alias ts="tig status"
 alias pulls="open https://github.com/pulls"
-
-# Casumo
-alias c-new-issue="open https://github.com/Casumo/Home/issues/new"
-alias c-open-issue='f () { open "https://github.com/Casumo/Home/issues/$1"; }; f'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -98,6 +105,9 @@ alias reload="exec $SHELL -l"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Lock the screen (when going AFK)
     alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+    # Unmount drives
+    alias unmount-all="find /dev -name \"disk[1-9]\" -exec diskutil eject {} \;"
 
     # Volume
     alias mute="osascript -e 'set volume output muted true'"
