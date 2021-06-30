@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh
 
 # Load the shell dotfiles, and then some:
-for file in ~/.bash_{path,prompt,exports,aliases,functions,extra}.sh; do
+for file in ~/.bash_{path,prompt,exports,aliases,functions,extra,docs}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
