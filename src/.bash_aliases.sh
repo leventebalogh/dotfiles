@@ -1,54 +1,3 @@
-# Easier navigation: .., ..., ...., ....., ~ and -
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
-
-# Other
-alias simulator="open -a Simulator"
-
-# Browser
-alias incognito="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --incognito > /dev/null 2>&1 &"
-alias inc="incognito"
-alias new-chrome="rm -rf $HOME/tmp/chrome && mkdir -p $HOME/tmp/chrome && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --incognito --start-maximized --user-data-dir=$HOME/tmp/chrome > /dev/null 2>&1 &"
-alias work-chrome="mkdir -p $HOME/tmp/chrome-work && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --start-maximized --user-data-dir=$HOME/tmp/chrome-work > /dev/null 2>&1 &"
-
-# Docker
-alias docker-clear-containers="docker rm $(docker ps -a -q)"
-alias docker-clear-images='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
-alias dce='f () { docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti "$1" bash; }; f'
-alias dcc="docker-clear-containers"
-alias dci="docker-clear-images"
-alias dcu='docker-compose up -d && docker-compose logs --follow'
-alias dcd='docker-compose down'
-alias dps='docker ps'
-
-# Network
-alias netusage="nettop -d -J "bytes_in,bytes_out""
-alias get-ssl-cert='f () { echo | openssl s_client -showcerts -servername "$1" -connect "$1:443" 2>/dev/null | openssl x509 -inform pem -noout -text; }; f'
-alias location-by-ip="curl -s https://ipvigilante.com/$(curl -s https://ipinfo.io/ip) | jq '.data.latitude, .data.longitude, .data.city_name, .data.country_name'"
-alias whois="f() { whois $1 | grep -E '^\s{3}'}; f"
-
-# Shortcuts
-alias voc="code -r ~/Desktop/notes/VOC.txt"
-alias notes="code -r ~/Documents/Safe/Notes/notes.txt"
-alias todo="code -r ~/Documents/Safe/Notes/todo.txt"
-alias budget="code -r ~/Documents/Safe/Notes/budget.txt"
-alias books="code -r ~/Documents/Safe/Notes/books.txt"
-alias teamspeak='open -a /Applications/TeamSpeak\ 3\ Client.app'
-alias draw='open https://docs.google.com/drawings/'
-
-# Git
-alias gs="git status"
-alias gc="git commit"
-alias gp="git push"
-alias gl="git l"
-alias gco="git checkout"
-alias ts="tig status"
-alias pulls="open https://github.com/pulls"
-
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"
@@ -75,34 +24,14 @@ alias egrep='egrep --color=auto'
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
-
-# Empty the Trash on all mounted volumes and the main HDD.
-# Also, clear Apple’s System Logs to improve shell startup speed.
-# Finally, clear download history from quarantine. https://mths.be/bum
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-# URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
-
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
-# On Mac
+
+# --- MAC ----------------------------------
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias simulator="open -a Simulator"
+
     # Lock the screen (when going AFK)
     alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
@@ -122,4 +51,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
     alias update='sudo softwareupdate -i -a; brew update; brew upgrade --all; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update'
+
+    # Flush Directory Service cache
+    alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+    # Empty the Trash on all mounted volumes and the main HDD.
+    # Also, clear Apple’s System Logs to improve shell startup speed.
+    # Finally, clear download history from quarantine. https://mths.be/bum
+    alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+    # Start new Chrome sessions
+    alias new-chrome="rm -rf $HOME/tmp/chrome && mkdir -p $HOME/tmp/chrome && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --incognito --start-maximized --user-data-dir=$HOME/tmp/chrome > /dev/null 2>&1 &"
+    alias work-chrome="mkdir -p $HOME/tmp/chrome-work && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --start-maximized --user-data-dir=$HOME/tmp/chrome-work > /dev/null 2>&1 &"
 fi
