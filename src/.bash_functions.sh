@@ -195,8 +195,9 @@ fi;
 
 ### --- DOCKER ------------------------
 
-	alias docker-clear-containers="docker rm $(docker ps -a -q)"
-	alias docker-clear-images='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
+	alias docker-stop-all="docker stop $(docker ps -a -q)"
+	alias docker-rm-all="docker rm $(docker ps -a -q)"
+	alias docker-clear='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 
 	function docker-exec {
 		docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -ti "$1" bash
