@@ -195,7 +195,7 @@ fi;
 
 ### --- DOCKER ------------------------
 
-	alias docker-stop-all="docker stop $(docker ps -a -q)"
+	alias docker-stop-all="docker kill $(docker ps -q)"
 	alias docker-rm-all="docker rm $(docker ps -a -q)"
 	alias docker-clear='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 
