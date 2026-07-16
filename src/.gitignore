@@ -13,8 +13,10 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-# Gulp completion files
-.gulp-completion
+# Mise
+.mise.toml
+mise.toml
 
-# Temporary
-build-original
+# FAVICON FOR CONDUCTOR
+# More info: https://docs.conductor.build/faq#where-does-conductor-get-the-repo-icon
+apple-touch-icon.png

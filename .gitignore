@@ -1,0 +1,5 @@
+# Machine-specific repo list produced by scripts/dump-repos.sh —
+# transfer it via AirDrop instead of committing it.
+repos.txt
+
+.DS_Store

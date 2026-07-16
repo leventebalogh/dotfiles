@@ -1,118 +1,34 @@
 [user]
     name = Levente Balogh
     email = balogh.levente.hu@gmail.com
+	signingkey = /Users/leventebalogh/.ssh/git-signing
 
 [alias]
-
-    l = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\" -n 100 --graph --abbrev-commit --decorate --date="short"
-    st = status
-    sts = status -s
+    aliases = "! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | pygmentize -l properties"
+    amend = commit --amend --reuse-message=HEAD # Amend the currently staged files to the latest commit
     br = branch
+    branches-of = "!f() { git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n | grep origin | grep -i $1; }; f" # Shows branches belonging with to a user (E.g. `$ git branches-of Levente`)
+    changed-files = "!f() { if [ -z $1 ]; then branch=$(git current-branch); else branch=$1; fi; git diff --name-only $branch $(git merge-base $branch $(git main-branch)); }; f" # Shows which files were modified in the current branch
+    changes = "!f() { git diff $(git main-branch) $(git current-branch) -- $1; }; f" # Shows differences of the current branch relative to the main branch
+    cleanup = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d && git fetch --prune" # Remove branches that have already been merged with master and delete remote branches that are deleted on the remote
     co = checkout
+    contributors = shortlog --summary --numbered # List contributors for the repo with number of commits
+    current-branch = "!f() { git rev-parse --abbrev-ref HEAD; }; f"
+    find-by-file = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f" # Find commits by source code
+    find-by-message = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f" # Find commits by commit message
+    l = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\" -n 100 --graph --abbrev-commit --decorate --date="short"
+    lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}' # Lists your latest branches
     log-pretty = log --pretty=format:\"%C(yellow) %h %Creset %ad %C(magenta bold)%d%Creset %s %C(green)(%an)%Creset\"
-
-    # Shortcuts for rebasing
-    rbm = rebase -i origin/master
+    main = "!git main-branch | xargs git checkout" # Checks out the main branch of the repo
+    main-branch = "!git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'" # Shows the main branch of the repo
+    purge = "!f() { git reset --hard; git clean -df; }; f" # Cleans all changes and removes untracked files
     rba = rebase --abort
     rbc = rebase --continue
-
-    # Checkout
-    use-ours = "!f() { git diff --name-only --diff-filter=U | xargs git checkout --ours; }; f"
-    use-theirs = "!f() { git diff --name-only --diff-filter=U | xargs git checkout --theirs; }; f"
-
-    # Update
-    update = "!f() { git fetch --all -q && git rebase origin/master && git push --force; }; f"
-
-    # List tags
-    tags = tag -l
-
-    # List remotes
-    remotes = remote -v
-
-    # Add another author to a commit
-    credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
-
-    # Find commits by source code
-    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
-
-    # Find commits by commit message
-    fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-
-    # Remove branches that have already been merged with master
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-    delete-merged = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-
-    # Commit all changes
-    ca = !git add -A && git commit -asv
-
-    # Amend the currently staged files to the latest commit
-    amend = commit --amend --reuse-message=HEAD
-
-    # List contributors for the repo with number of commits
-    contributors = shortlog --summary --numbered
-
-    # Reverts the latest merge
-    undo-merge = "reset --merge ORIG_HEAD"
-
-    # Gives back the name of the current branch
-    current-branch = "!f() { git rev-parse --abbrev-ref HEAD; }; f"
-
-    # Moves every staged file to unstaged
-    unstage = "reset HEAD"
-
-    # Removes every untracked file
-    remove-untracked = "!f() { git st -s | grep ?? | sed s/'?? '// | xargs rm -r; }; f"
-    delete-untracked = "!f() { git st -s | grep ?? | sed s/'?? '// | xargs rm -r; }; f"
-
-    # Adds a foo-bar commit with the latest changes
-    # Note! This one is passing the commit hooks!
-    wip = "!f() { git add -A; git commit -nm 'Wip'; }; f"
-    wip-continue = "!f() { git reset HEAD^; }; f"
-
-    # Shows only the merge commits to the master branch
-    l-merges = "!f() { git l --merges --grep='Merge pull request'; }; f"
-
-    # Shows which files are conflicting
-    conflicted-files = "!f() { git diff --name-only --diff-filter=U; }; f"
-
-    # Shows which files were modified in the current branch
-    changed = "!f() { if [ -z $1 ]; then branch=$(git current-branch); else branch=$1; fi; git diff --name-only $branch $(git merge-base $branch master); }; f"
-
-    # Shows differences of the current branch relative to the master
-    diff-to-master = "!f() { git diff master $(git current-branch) -- $1; }; f"
-
-    # Shows branches belonging with to a user
-    # E.g. `$ git branches-of Levente`
-    branches-of = "!f() { git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n | grep origin | grep -i $1; }; f"
-
-    # Tidying up commits on a branch that are not pushed yet.
-    # This is only rebasing commits that are ahead of the upstream version,
-    # so it won't fuck up GitHub history and comments
-    tidy = "!f() { remote_branch=`git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null`; if [[ -z \"$remote_branch\" ]] ; then echo 'There is no upstream branch set.' ; else git rebase -i $remote_branch $@; fi ; } ; f "
-
-    # Gives back the last commit's message
-    commit-message = "!f() { echo `git log -1 --pretty=%B`; }; f"
-
-    # Open edited files
-    open-edited = "!f() { git status --short | sed s/' M '// | xargs code -r; }; f"
-
-    # Casumo Specific aliases
-    #------------------------
-        # Returns the issue number
-        issue-number = "!f() { git current-branch | sed -n 's/.*\\(iss[0-9]*\\).*/\\1/p' | sed 's/iss//'; }; f"
-
-        # Creates a commit stamp
-        commit-stamp = "!f() { echo \"Casumo/Home#$(git issue-number)\"; }; f"
-
-        # Adds a commit stamp to the latest commit
-        append-commit-stamp = "!f() { if [[ \"$(git commit-message)\" != *\"$1\"* ]] ; then git commit --amend -m \"$(git commit-message)\" -m \"$1\"; fi; }; f"
-
-        # Adds commit stamps to all of the commits that are not pushed yet
-        apply-stamps = "! source ~/.aliases; f() { remote_branch=`git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null`; if [[ -z $remote_branch ]] ; then read -p 'No upstream branch found. Rebase to origin/master instad? (Y/n) ' -n 1 -r; echo; if [[ ! $REPLY =~ ^[Nn]$ ]]; then remote_branch='origin/master'; else exit; fi; fi; git rebase -i $remote_branch --exec=\"git append-commit-stamp '$(git commit-stamp)'\"; } ; f "
-
-        # Opens the issue for the current branch
-        open-issue = "!f() { open \"https://github.com/Casumo/Home/issues/$(git issue-number)\"; }; f"
-        issue = "!f() { git open-issue; }; f"
+    rbm = "!git main-branch | xargs git rebase -i"
+    st = status
+    undo-merge = "reset --merge ORIG_HEAD" # Reverts the latest merge
+    wip = "!f() { git add -A; git commit -nm 'Wip'; }; f" # Commits everything with the message 'Wip'
+    wip-continue = "!f() { git reset HEAD^; }; f" # Removes the last commit and moves the changes to the staging area
 
 [apply]
 
@@ -194,10 +110,10 @@
 
 [credential]
     helper = osxkeychain
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh

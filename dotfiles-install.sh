@@ -1,21 +1,20 @@
-# Copying
-echo "* Copying dotfiles to ${HOME}"
+#!/usr/bin/env bash
+#
+# Copies every dotfile from ./src into $HOME (overwrites existing files).
+
+set -euo pipefail
+
+SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/src" && pwd)"
+
+echo "* Copying dotfiles from $SRC_DIR to $HOME"
 echo ""
 
-# OSX
-if [ "$(uname)" == "Darwin" ]; then
-    cp -frv ./src/ ~/
-# Linux
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-    cp -frvT "$SCRIPTPATH/src/" ~/
-fi
+for f in "$SRC_DIR"/.*; do
+    name="$(basename "$f")"
+    { [ "$name" = "." ] || [ "$name" = ".." ]; } && continue
+    [ -f "$f" ] || continue
+    cp -v "$f" "$HOME/$name"
+done
 
 echo ""
-
-# Reloading bash session
-echo "* Reloding BASH session..."
-echo ""
-source ~/.bashrc
-
-echo "✔ Successfully installed bash scripts."
+echo "✔ Dotfiles installed. Open a new shell (or 'source ~/.bash_profile') to apply."
